@@ -1,3 +1,5 @@
+import {  } from 'react-native-webrtc';
+
 // global variables
 var chromeMediaSource = 'screen';
 var sourceId;
