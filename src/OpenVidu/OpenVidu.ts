@@ -28,7 +28,7 @@ import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
 
 //import * as screenSharingAuto from '../OpenViduInternal/ScreenSharing/Screen-Capturing-Auto';
 //import * as screenSharing from '../OpenViduInternal/ScreenSharing/Screen-Capturing';
-import { Video as VideoElement } from 'react-native-webrtc';
+import { Video as VideoElement,getUserMedia } from 'react-native-webrtc';
 import RpcBuilder = require('../OpenViduInternal/KurentoUtils/kurento-jsonrpc');
 import platform = require('platform');
 
@@ -379,7 +379,7 @@ export class OpenVidu {
     return new Promise<MediaStream>((resolve, reject) => {
       this.generateMediaConstraints(options)
         .then(constraints => {
-          navigator.mediaDevices.getUserMedia(constraints)
+          getUserMedia(constraints)
             .then(mediaStream => {
               resolve(mediaStream);
             })

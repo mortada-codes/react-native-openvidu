@@ -27,7 +27,7 @@ import { StreamPropertyChangedEvent } from '../OpenViduInternal/Events/StreamPro
 import { VideoElementEvent } from '../OpenViduInternal/Events/VideoElementEvent';
 import { OpenViduError, OpenViduErrorName } from '../OpenViduInternal/Enums/OpenViduError';
 import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
-import {Video as VideoElement} from 'react-native-webrtc';
+import {Video as VideoElement ,getUserMedia} from 'react-native-webrtc';
 import platform = require('platform');
 
 
@@ -414,7 +414,7 @@ export class Publisher extends StreamManager {
                         let startTime = Date.now();
                         this.setPermissionDialogTimer(timeForDialogEvent);
 
-                        navigator.mediaDevices.getUserMedia(constraintsAux)
+                        getUserMedia(constraintsAux)
                             .then(mediaStream => {
                                 this.clearPermissionDialogTimer(startTime, timeForDialogEvent);
 
@@ -425,7 +425,7 @@ export class Publisher extends StreamManager {
                                     startTime = Date.now();
                                     this.setPermissionDialogTimer(timeForDialogEvent);
 
-                                    navigator.mediaDevices.getUserMedia(constraintsAux)
+                                    getUserMedia(constraintsAux)
                                         .then(audioOnlyStream => {
                                             this.clearPermissionDialogTimer(startTime, timeForDialogEvent);
                                             mediaStream.addTrack(audioOnlyStream.getAudioTracks()[0]);
@@ -466,7 +466,7 @@ export class Publisher extends StreamManager {
                                 let errorName, errorMessage;
                                 switch (error.name.toLowerCase()) {
                                     case 'notfounderror':
-                                        navigator.mediaDevices.getUserMedia({
+                                        getUserMedia({
                                             audio: false,
                                             video: constraints.video
                                         })
@@ -489,7 +489,7 @@ export class Publisher extends StreamManager {
                                         errorCallback(new OpenViduError(errorName, errorMessage));
                                         break;
                                     case 'overconstrainederror':
-                                        navigator.mediaDevices.getUserMedia({
+                                        getUserMedia({
                                             audio: false,
                                             video: constraints.video
                                         })
