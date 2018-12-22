@@ -3,6 +3,7 @@ import { EventDispatcher } from '../OpenViduInternal/Interfaces/Public/EventDisp
 import { StreamManagerVideo } from '../OpenViduInternal/Interfaces/Public/StreamManagerVideo';
 import { Event } from '../OpenViduInternal/Events/Event';
 import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
+import { Video as VideoElement } from 'react-native-webrtc';
 import EventEmitter = require('wolfy87-eventemitter');
 /**
  * Interface in charge of displaying the media streams in the HTML DOM. This wraps any [[Publisher]] and [[Subscriber]] object.
@@ -33,7 +34,7 @@ export declare class StreamManager implements EventDispatcher {
      * - [[Publisher]] has been initialized by calling method [[OpenVidu.initPublisher]] with a valid `targetElement` parameter
      * - [[Subscriber]] has been initialized by calling method [[Session.subscribe]] with a valid `targetElement` parameter
      */
-    targetElement: HTMLElement;
+    targetElement: VideoElement;
     /**
      * `id` attribute of the DOM video element displaying the Publisher/Subscriber's stream. This property is only defined if:
      * - [[Publisher]] has been initialized by calling method [[OpenVidu.initPublisher]] with a valid `targetElement` parameter
@@ -51,7 +52,7 @@ export declare class StreamManager implements EventDispatcher {
     /**
      * @hidden
      */
-    element: HTMLElement;
+    element: VideoElement;
     /**
      * @hidden
      */
@@ -63,7 +64,7 @@ export declare class StreamManager implements EventDispatcher {
     /**
      * @hidden
      */
-    constructor(stream: Stream, targetElement?: HTMLElement | string);
+    constructor(stream: Stream, targetElement?: VideoElement);
     /**
      * See [[EventDispatcher.on]]
      */
@@ -98,7 +99,7 @@ export declare class StreamManager implements EventDispatcher {
      * @param targetElement HTML DOM element (or its `id` attribute) in which the video element of the Publisher/Subscriber will be inserted
      * @param insertMode How the video element will be inserted accordingly to `targetElemet`
      */
-    createVideoElement(targetElement?: string | HTMLElement, insertMode?: VideoInsertMode): HTMLVideoElement;
+    createVideoElement(targetElement?: VideoElement, insertMode?: VideoInsertMode): HTMLVideoElement;
     /**
      * @hidden
      */

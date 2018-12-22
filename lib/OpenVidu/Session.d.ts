@@ -17,6 +17,7 @@ import { RecordingEvent } from '../OpenViduInternal/Events/RecordingEvent';
 import { SessionDisconnectedEvent } from '../OpenViduInternal/Events/SessionDisconnectedEvent';
 import { SignalEvent } from '../OpenViduInternal/Events/SignalEvent';
 import { StreamEvent } from '../OpenViduInternal/Events/StreamEvent';
+import { Video as VideoElement } from 'react-native-webrtc';
 /**
  * Represents a video call. It can also be seen as a videoconference room where multiple users can connect.
  * Participants who publish their videos to a session can be seen by the rest of users connected to that specific session.
@@ -95,15 +96,15 @@ export declare class Session implements EventDispatcher {
      * The [[Session]] object of every other participant connected to the session will dispatch a `connectionDestroyed` event in any case. See [[ConnectionEvent]] to learn more.
      */
     disconnect(): void;
-    subscribe(stream: Stream, targetElement: string | HTMLElement): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, completionHandler: (error: Error | undefined) => void): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties, completionHandler: (error: Error | undefined) => void): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, completionHandler: (error: Error | undefined) => void): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties, completionHandler: (error: Error | undefined) => void): Subscriber;
     /**
      * Promisified version of [[Session.subscribe]]
      */
-    subscribeAsync(stream: Stream, targetElement: string | HTMLElement): Promise<Subscriber>;
-    subscribeAsync(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties): Promise<Subscriber>;
+    subscribeAsync(stream: Stream, targetElement: VideoElement): Promise<Subscriber>;
+    subscribeAsync(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties): Promise<Subscriber>;
     /**
      * Unsubscribes from `subscriber`, automatically removing its associated HTML video elements.
      *

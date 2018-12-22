@@ -5,6 +5,7 @@ import { Stream } from './Stream';
 import { Device } from '../OpenViduInternal/Interfaces/Public/Device';
 import { OpenViduAdvancedConfiguration } from '../OpenViduInternal/Interfaces/Public/OpenViduAdvancedConfiguration';
 import { PublisherProperties } from '../OpenViduInternal/Interfaces/Public/PublisherProperties';
+import { Video as VideoElement } from 'react-native-webrtc';
 /**
  * Entrypoint of OpenVidu Browser library.
  * Use it to initialize objects of type [[Session]], [[Publisher]] and [[LocalRecorder]]
@@ -48,17 +49,17 @@ export declare class OpenVidu {
      * Returns new session
      */
     initSession(): Session;
-    initPublisher(targetElement: string | HTMLElement): Publisher;
-    initPublisher(targetElement: string | HTMLElement, properties: PublisherProperties): Publisher;
-    initPublisher(targetElement: string | HTMLElement, completionHandler: (error: Error | undefined) => void): Publisher;
-    initPublisher(targetElement: string | HTMLElement, properties: PublisherProperties, completionHandler: (error: Error | undefined) => void): Publisher;
+    initPublisher(targetElement: VideoElement): Publisher;
+    initPublisher(targetElement: VideoElement, properties: PublisherProperties): Publisher;
+    initPublisher(targetElement: VideoElement, completionHandler: (error: Error | undefined) => void): Publisher;
+    initPublisher(targetElement: VideoElement, properties: PublisherProperties, completionHandler: (error: Error | undefined) => void): Publisher;
     /**
      * Promisified version of [[OpenVidu.initPublisher]]
      *
      * > WARNING: events `accessDialogOpened` and `accessDialogClosed` will not be dispatched if using this method instead of [[OpenVidu.initPublisher]]
      */
-    initPublisherAsync(targetElement: string | HTMLElement): Promise<Publisher>;
-    initPublisherAsync(targetElement: string | HTMLElement, properties: PublisherProperties): Promise<Publisher>;
+    initPublisherAsync(targetElement: VideoElement): Promise<Publisher>;
+    initPublisherAsync(targetElement: VideoElement, properties: PublisherProperties): Promise<Publisher>;
     /**
      * Returns a new local recorder for recording streams straight away from the browser
      * @param stream  Stream to record

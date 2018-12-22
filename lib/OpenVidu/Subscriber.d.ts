@@ -1,6 +1,7 @@
 import { Stream } from './Stream';
 import { StreamManager } from './StreamManager';
 import { SubscriberProperties } from '../OpenViduInternal/Interfaces/Public/SubscriberProperties';
+import { Video as VideoElement } from 'react-native-webrtc';
 /**
  * Packs remote media streams. Participants automatically receive them when others publish their streams. Initialized with [[Session.subscribe]] method
  */
@@ -9,7 +10,7 @@ export declare class Subscriber extends StreamManager {
     /**
      * @hidden
      */
-    constructor(stream: Stream, targEl: string | HTMLElement, properties: SubscriberProperties);
+    constructor(stream: Stream, targEl: VideoElement, properties: SubscriberProperties);
     /**
      * Subscribe or unsubscribe from the audio stream (if available). Calling this method twice in a row passing same value will have no effect
      * @param value `true` to subscribe to the audio stream, `false` to unsubscribe from it

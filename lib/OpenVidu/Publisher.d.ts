@@ -5,6 +5,7 @@ import { StreamManager } from './StreamManager';
 import { EventDispatcher } from '../OpenViduInternal/Interfaces/Public/EventDispatcher';
 import { PublisherProperties } from '../OpenViduInternal/Interfaces/Public/PublisherProperties';
 import { Event } from '../OpenViduInternal/Events/Event';
+import { Video as VideoElement } from 'react-native-webrtc';
 /**
  * Packs local media streams. Participants can publish it to a session. Initialized with [[OpenVidu.initPublisher]] method
  */
@@ -31,7 +32,7 @@ export declare class Publisher extends StreamManager {
     /**
      * @hidden
      */
-    videoReference: HTMLVideoElement;
+    videoReference: VideoElement;
     /**
      * @hidden
      */
@@ -39,7 +40,7 @@ export declare class Publisher extends StreamManager {
     /**
      * @hidden
      */
-    constructor(targEl: string | HTMLElement, properties: PublisherProperties, openvidu: OpenVidu);
+    constructor(targEl: VideoElement, properties: PublisherProperties, openvidu: OpenVidu);
     /**
      * Publish or unpublish the audio stream (if available). Calling this method twice in a row passing same value will have no effect
      *
