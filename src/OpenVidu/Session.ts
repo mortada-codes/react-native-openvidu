@@ -39,7 +39,7 @@ import { StreamEvent } from '../OpenViduInternal/Events/StreamEvent';
 import { StreamPropertyChangedEvent } from '../OpenViduInternal/Events/StreamPropertyChangedEvent';
 import { OpenViduError, OpenViduErrorName } from '../OpenViduInternal/Enums/OpenViduError';
 import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
-
+import { Video as VideoElement } from 'react-native-webrtc';
 import platform = require('platform');
 import EventEmitter = require('wolfy87-eventemitter');
 
@@ -188,10 +188,10 @@ export class Session implements EventDispatcher {
         this.leave(false, 'disconnect');
     }
 
-    subscribe(stream: Stream, targetElement: string | HTMLElement): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, completionHandler: (error: Error | undefined) => void): Subscriber;
-    subscribe(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties, completionHandler: (error: Error | undefined) => void): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, completionHandler: (error: Error | undefined) => void): Subscriber;
+    subscribe(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties, completionHandler: (error: Error | undefined) => void): Subscriber;
 
     /**
      * Subscribes to a `stream`, adding a new HTML video element to DOM with `subscriberProperties` settings. This method is usually called in the callback of `streamCreated` event.
@@ -208,7 +208,7 @@ export class Session implements EventDispatcher {
      * You can always call method [[Subscriber.addVideoElement]] or [[Subscriber.createVideoElement]] to manage the video elements on your own (see [Manage video players](/docs/how-do-i/manage-videos) section)
      * @param completionHandler `error` parameter is null if `subscribe` succeeds, and is defined if it fails.
      */
-    subscribe(stream: Stream, targetElement: string | HTMLElement, param3?: ((error: Error | undefined) => void) | SubscriberProperties, param4?: ((error: Error | undefined) => void)): Subscriber {
+    subscribe(stream: Stream, targetElement: VideoElement, param3?: ((error: Error | undefined) => void) | SubscriberProperties, param4?: ((error: Error | undefined) => void)): Subscriber {
         let properties: SubscriberProperties = {};
         if (!!param3 && typeof param3 !== 'function') {
             properties = {
@@ -256,10 +256,10 @@ export class Session implements EventDispatcher {
     /**
      * Promisified version of [[Session.subscribe]]
      */
-    subscribeAsync(stream: Stream, targetElement: string | HTMLElement): Promise<Subscriber>;
-    subscribeAsync(stream: Stream, targetElement: string | HTMLElement, properties: SubscriberProperties): Promise<Subscriber>;
+    subscribeAsync(stream: Stream, targetElement: VideoElement): Promise<Subscriber>;
+    subscribeAsync(stream: Stream, targetElement: VideoElement, properties: SubscriberProperties): Promise<Subscriber>;
 
-    subscribeAsync(stream: Stream, targetElement: string | HTMLElement, properties?: SubscriberProperties): Promise<Subscriber> {
+    subscribeAsync(stream: Stream, targetElement: VideoElement, properties?: SubscriberProperties): Promise<Subscriber> {
         return new Promise<Subscriber>((resolve, reject) => {
 
             let subscriber: Subscriber;

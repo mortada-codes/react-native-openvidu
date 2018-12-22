@@ -28,7 +28,7 @@ import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
 
 //import * as screenSharingAuto from '../OpenViduInternal/ScreenSharing/Screen-Capturing-Auto';
 //import * as screenSharing from '../OpenViduInternal/ScreenSharing/Screen-Capturing';
-
+import { Video as VideoElement } from 'react-native-webrtc';
 import RpcBuilder = require('../OpenViduInternal/KurentoUtils/kurento-jsonrpc');
 import platform = require('platform');
 
@@ -145,10 +145,10 @@ export class OpenVidu {
   }
 
 
-  initPublisher(targetElement: string | HTMLElement): Publisher;
-  initPublisher(targetElement: string | HTMLElement, properties: PublisherProperties): Publisher;
-  initPublisher(targetElement: string | HTMLElement, completionHandler: (error: Error | undefined) => void): Publisher;
-  initPublisher(targetElement: string | HTMLElement, properties: PublisherProperties, completionHandler: (error: Error | undefined) => void): Publisher;
+  initPublisher(targetElement: VideoElement): Publisher;
+  initPublisher(targetElement: VideoElement, properties: PublisherProperties): Publisher;
+  initPublisher(targetElement: VideoElement, completionHandler: (error: Error | undefined) => void): Publisher;
+  initPublisher(targetElement: VideoElement, properties: PublisherProperties, completionHandler: (error: Error | undefined) => void): Publisher;
 
   /**
    * Returns a new publisher
@@ -170,7 +170,7 @@ export class OpenVidu {
    * @param completionHandler `error` parameter is null if `initPublisher` succeeds, and is defined if it fails.
    *                          `completionHandler` function is called before the Publisher dispatches an `accessAllowed` or an `accessDenied` event
    */
-  initPublisher(targetElement: string | HTMLElement, param2?, param3?): Publisher {
+  initPublisher(targetElement: VideoElement, param2?, param3?): Publisher {
 
     let properties: PublisherProperties;
 
@@ -236,10 +236,10 @@ export class OpenVidu {
    *
    * > WARNING: events `accessDialogOpened` and `accessDialogClosed` will not be dispatched if using this method instead of [[OpenVidu.initPublisher]]
    */
-  initPublisherAsync(targetElement: string | HTMLElement): Promise<Publisher>;
-  initPublisherAsync(targetElement: string | HTMLElement, properties: PublisherProperties): Promise<Publisher>;
+  initPublisherAsync(targetElement: VideoElement): Promise<Publisher>;
+  initPublisherAsync(targetElement: VideoElement, properties: PublisherProperties): Promise<Publisher>;
 
-  initPublisherAsync(targetElement: string | HTMLElement, properties?: PublisherProperties): Promise<Publisher> {
+  initPublisherAsync(targetElement: VideoElement, properties?: PublisherProperties): Promise<Publisher> {
     return new Promise<Publisher>((resolve, reject) => {
 
       let publisher: Publisher;

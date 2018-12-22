@@ -27,7 +27,7 @@ import { StreamPropertyChangedEvent } from '../OpenViduInternal/Events/StreamPro
 import { VideoElementEvent } from '../OpenViduInternal/Events/VideoElementEvent';
 import { OpenViduError, OpenViduErrorName } from '../OpenViduInternal/Enums/OpenViduError';
 import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
-
+import {Video as VideoElement} from 'react-native-webrtc';
 import platform = require('platform');
 
 
@@ -62,7 +62,7 @@ export class Publisher extends StreamManager {
     /**
      * @hidden
      */
-    videoReference: HTMLVideoElement;
+    videoReference: VideoElement;
     /**
      * @hidden
      */
@@ -71,7 +71,7 @@ export class Publisher extends StreamManager {
     /**
      * @hidden
      */
-    constructor(targEl: string | HTMLElement, properties: PublisherProperties, openvidu: OpenVidu) {
+    constructor(targEl:  VideoElement, properties: PublisherProperties, openvidu: OpenVidu) {
         super(new Stream((!!openvidu.session) ? openvidu.session : new Session(openvidu), { publisherProperties: properties, mediaConstraints: {} }), targEl);
         this.properties = properties;
         this.openvidu = openvidu;

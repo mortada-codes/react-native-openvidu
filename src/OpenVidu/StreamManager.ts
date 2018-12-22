@@ -22,7 +22,7 @@ import { Event } from '../OpenViduInternal/Events/Event';
 import { StreamManagerEvent } from '../OpenViduInternal/Events/StreamManagerEvent';
 import { VideoElementEvent } from '../OpenViduInternal/Events/VideoElementEvent';
 import { VideoInsertMode } from '../OpenViduInternal/Enums/VideoInsertMode';
-
+import { Video as VideoElement } from 'react-native-webrtc';
 import EventEmitter = require('wolfy87-eventemitter');
 
 
@@ -59,7 +59,7 @@ export class StreamManager implements EventDispatcher {
      * - [[Publisher]] has been initialized by calling method [[OpenVidu.initPublisher]] with a valid `targetElement` parameter
      * - [[Subscriber]] has been initialized by calling method [[Session.subscribe]] with a valid `targetElement` parameter
      */
-    targetElement: HTMLElement;
+    targetElement: VideoElement;
 
     /**
      * `id` attribute of the DOM video element displaying the Publisher/Subscriber's stream. This property is only defined if:
@@ -79,7 +79,7 @@ export class StreamManager implements EventDispatcher {
     /**
      * @hidden
      */
-    element: HTMLElement;
+    element: VideoElement;
     /**
      * @hidden
      */
@@ -93,16 +93,14 @@ export class StreamManager implements EventDispatcher {
     /**
      * @hidden
      */
-    constructor(stream: Stream, targetElement?: HTMLElement | string) {
+    constructor(stream: Stream, targetElement?: VideoElement) {
         this.stream = stream;
         this.stream.streamManager = this;
         this.remote = !this.stream.isLocal();
 
         if (!!targetElement) {
             let targEl;
-            if (typeof targetElement === 'string') {
-                targEl = document.getElementById(targetElement);
-            } else if (targetElement instanceof HTMLElement) {
+          if (targetElement instanceof VideoElement) {
                 targEl = targetElement;
             }
 
@@ -265,14 +263,14 @@ export class StreamManager implements EventDispatcher {
      * @param targetElement HTML DOM element (or its `id` attribute) in which the video element of the Publisher/Subscriber will be inserted
      * @param insertMode How the video element will be inserted accordingly to `targetElemet`
      */
-    createVideoElement(targetElement?: string | HTMLElement, insertMode?: VideoInsertMode): HTMLVideoElement {
+    createVideoElement(targetElement?: VideoElement, insertMode?: VideoInsertMode): HTMLVideoElement {
         let targEl;
         if (typeof targetElement === 'string') {
             targEl = document.getElementById(targEl);
             if (!targEl) {
                 throw new Error("The provided 'targetElement' couldn't be resolved to any HTML element: " + targetElement);
             }
-        } else if (targetElement instanceof HTMLElement) {
+        } else if (targetElement instanceof VideoElement) {
             targEl = targetElement;
         } else {
             throw new Error("The provided 'targetElement' couldn't be resolved to any HTML element: " + targetElement);
