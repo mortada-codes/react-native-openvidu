@@ -56,7 +56,7 @@ if (!Function.prototype.bind) {
 }
 
 
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('emitter').EventEmitter;
 
 var inherits = require('inherits');
 
